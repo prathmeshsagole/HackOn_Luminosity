@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Report</h1>
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic content will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const reportData = [];
+            const productKeys = [...params.keys()].filter(key => key.startsWith('products['));
+
+            productKeys.forEach(key => {
+                const index = key.match(/\[(\d+)\]/)[1];
+                const product = params.get(key);
+                const quantity = params.get(`quantities[${index}]`);
+                reportData.push({ product, quantity });
+            });
+
+            return reportData;
+        }
+
+        function displayReport() {
+            const reportData = getQueryParams();
+            const tableBody = document.querySelector('#reportTable tbody');
+
+            reportData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${item.product}</td><td>${item.quantity}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        displayReport();
+    </script>
+</body>
+</html>

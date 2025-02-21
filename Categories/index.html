@@ -3,38 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories Page</title>
+    <title>Product Selection</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Select Product Category</h1>
-        <form id="categoryForm">
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-                <option value="single-use">Single Use</option>
-                <option value="multi-use">Multi Use</option>
-                <option value="hazardous">Hazardous</option>
-            </select>
-
-            <label for="quantity">Quantity:</label>
-            <select id="quantity" name="quantity">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
+        <h1>Select Products</h1>
+        <div class="product-selector">
             <label for="product">Product Name:</label>
             <select id="product" name="product">
-                <option value="product1">Product 1</option>
-                <option value="product2">Product 2</option>
-                <option value="product3">Product 3</option>
+                <!-- <option value="">Select a product</option>
+                <option value="plastic_bottle">Plastic Bottle</option>
+                <option value="rechargeable_battery">Rechargeable Battery</option>
+                <option value="pesticide_container">Pesticide Container</option> -->
+                <!-- Add more products as needed -->
+                    <option value="">Select a product</option>
+                    <option value="needle">Needle</option>
+                    <option value="syringe">Syringe</option>
+                    <option value="scalpel">Scalpel</option>
+                    <option value="blood_soaked_bandage">Blood-Soaked Bandage</option>
+                    <option value="gauze">Gauze</option>
+                    <option value="expired_medication">Expired Medication</option>
+                    <option value="vaccine">Vaccine</option>
+                    <option value="chemotherapy_drug">Chemotherapy Drug</option>
+                    <option value="iv_tubing">IV Tubing</option>
+                    <option value="catheter">Catheter</option>
+                    <option value="disposable_instrument">Disposable Instrument</option>
+                    <option value="blister_pack">Blister Pack</option>
+                    <option value="sterile_wrap">Sterile Wrap</option>
+                    <option value="plastic_bottle">Plastic Bottle</option>
+                    <option value="blister_foil">Blister Foil</option>
+                    <option value="medication_strip">Medication Strip</option>
+                    <option value="instruction_manual">Instruction Manual</option>
+                    <option value="medication_box">Medication Box</option>
+                    <option value="shipping_container">Shipping Container</option>
+                    <option value="surgical_tool">Surgical Tool</option>
+                    <option value="forceps">Forceps</option>
+                    <option value="scissors">Scissors</option>
+                    <option value="glass_vial">Glass Vial</option>
+                    <option value="medicine_bottle">Medicine Bottle</option>
+                    <option value="sterile_collection_container">Sterile Collection Container</option>
+                    <option value="iv_bag">IV Bag</option>
+                    <option value="old_monitor">Old Monitor</option>
+                    <option value="ecg_machine">ECG Machine</option>
+                    <option value="battery">Battery</option>
+                    <option value="face_shield">Face Shield</option>
+                    <option value="reusable_gown">Reusable Gown</option>
+                    <option value="reusable_mask">Reusable Mask</option>
+                    <option value="non_infected_cotton">Non-Infected Cotton</option>
+                    <option value="scrubs">Scrubs</option>
+                    <option value="human_tissue">Human Tissue</option>
+                    <option value="organ">Organ</option>
+                    <option value="body_fluid">Body Fluid</option>
+                    <option value="radioactive_material">Radioactive Material</option>
+                    <option value="disinfectant">Disinfectant</option>
+                    <option value="mercury_thermometer">Mercury Thermometer</option>
+                    <option value="lab_chemical">Lab Chemical</option>
+                    <option value="contaminated_ppe">Contaminated PPE</option>
+                    <option value="contaminated_glove">Contaminated Glove</option>
+                    <option value="contaminated_mask">Contaminated Mask</option>
+                    <option value="contaminated_gown">Contaminated Gown</option>
+                    <option value="gas_cylinder">Gas Cylinder</option>
+                    <option value="oxygen_tank">Oxygen Tank</option>
+                    <option value="pesticide_container">Pesticide Container</option>
             </select>
-
-            <button type="button" onclick="redirectToReport()">Generate Report</button>
-        </form>
+            <button onclick="addProduct()">Add Product</button>
+        </div>
+        <div class="product-table">
+            <h2>Selected Products</h2>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <!-- Dynamic content will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <button onclick="generateReport()">Generate Report</button>
     </div>
     <script src="script.js"></script>
 </body>
