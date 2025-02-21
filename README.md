@@ -1,4 +1,4 @@
-<h1 align="center"># MediBuddy</h1>  
+<h2 align="center">MediBuddy</h2>  
 
 MediBuddy is a user-friendly application designed to help users manage and analyze their waste generation efficiently. The application is divided into three main pages: **Dashboard, Categories, and Report**. Below is a detailed guide on how to set up and navigate through the UI of MediBuddy.
 
