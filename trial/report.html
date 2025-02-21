@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Report</title>
+    <link rel="stylesheet" href="report.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for Pie Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+<body>
+    <header>
+        <h1>Medical Waste Report</h1>
+    </header>
+
+    <main id="report-content">
+        <h2 class="section-title">Recyclable Items</h2>
+        <table id="recyclable-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Use Category</th> <!-- Added this column -->
+                    <th>Quantity</th>
+                    <th>Instruction</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h2 class="section-title">Disposable Items</h2>
+        <table id="disposable-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Use Category</th> <!-- Added this column -->
+                    <th>Quantity</th>
+                    <th>Instruction</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="buttons">
+            <button onclick="goBack()" class="back-button">Back to Input</button>
+            <button onclick="clearReport()" class="clear-button">Clear Report</button>
+            <button onclick="printReport()" class="print-button">Print Report</button>
+        </div>
+
+        <!-- Analytics Section -->
+        <section id="analytics">
+            <h2 class="section-title">Analytics</h2>
+            <p><strong>Total Waste Collected:</strong> <span id="total-waste">0</span></p>
+            <p><strong>Most Disposed Item:</strong> <span id="most-disposed">N/A</span></p>
+            <p><strong>Least Disposed Item:</strong> <span id="least-disposed">N/A</span></p>
+
+            <div class="chart-container">
+                <canvas id="wastePieChart"></canvas> <!-- Pie Chart -->
+            </div>
+        </section>
+    </main>
+
+    <script src="report.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Waste Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        form, table {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 20px auto;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #219150;
+        }
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Medical Waste Input</h1>
+    </header>
+
+    <main>
+        <form id="waste-form">
+            <label for="item">Select Item:</label>
+            <select id="item">
+                <option value="needles">Needles</option>
+                <option value="syringes">Syringes</option>
+                <option value="scalpels">Scalpels</option>
+                <option value="plastic-packaging">Plastic Packaging</option>
+                <option value="glass-vials">Glass Vials</option>
+                <option value="contaminated-ppe">Contaminated PPE</option>
+                <option value="expired-meds">Expired Medications</option>
+                <option value="cardboard-boxes">Cardboard Boxes</option>
+                <option value="metal-instruments">Metal Instruments</option>
+                <option value="iv-bottles">IV Bottles</option>
+            </select>
+
+            <label for="quantity">Enter Quantity:</label>
+            <input type="number" id="quantity" min="1" required>
+
+            <button type="submit">Add to Report</button>
+        </form>
+
+        <table id="waste-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Use Category</th>
+                    <th>Quantity</th>
+                    <th>Instruction</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+
+        <button onclick="goToReport()">Show Report</button>
+    </main>
+
+    <script>
+        let wasteData = JSON.parse(localStorage.getItem("wasteItems")) || [];
+        let wasteTypes = {
+            "needles": { type: "Sharps", disposal: "disposable", instruction: "Place in sharps container.", use: "Single-Use" },
+            "syringes": { type: "Sharps", disposal: "disposable", instruction: "Dispose with needle attached.", use: "Single-Use" },
+            "scalpels": { type: "Sharps", disposal: "disposable", instruction: "Use designated sharps bin.", use: "Single-Use" },
+            "plastic-packaging": { type: "Recyclable", disposal: "recyclable", instruction: "Sort and send to recycling.", use: "Single-Use" },
+            "glass-vials": { type: "Recyclable", disposal: "recyclable", instruction: "Rinse and recycle.", use: "Single-Use" },
+            "contaminated-ppe": { type: "Hazardous", disposal: "disposable", instruction: "Use biohazard bag.", use: "Single-Use" },
+            "expired-meds": { type: "Hazardous", disposal: "disposable", instruction: "Do not flush. Dispose properly.", use: "Single-Use" },
+            "cardboard-boxes": { type: "Recyclable", disposal: "recyclable", instruction: "Flatten and recycle.", use: "Single-Use" },
+            "metal-instruments": { type: "Recyclable", disposal: "recyclable", instruction: "Sterilize and recycle.", use: "Multi-Use" },
+            "iv-bottles": { type: "Recyclable", disposal: "recyclable", instruction: "Empty and recycle.", use: "Single-Use" }
+        };
+
+        document.getElementById("waste-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let item = document.getElementById("item").value;
+            let quantity = parseInt(document.getElementById("quantity").value);
+            let selectedWaste = wasteTypes[item];
+
+            let existingItem = wasteData.find(w => w.name === item);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                wasteData.push({ name: item, type: selectedWaste.type, use: selectedWaste.use, disposal: selectedWaste.disposal, quantity: quantity, instruction: selectedWaste.instruction });
+            }
+            localStorage.setItem("wasteItems", JSON.stringify(wasteData));
+            updateTable();
+        });
+
+        function updateTable() {
+            let tableBody = document.querySelector("#waste-table tbody");
+            tableBody.innerHTML = "";
+
+            wasteData.forEach((waste, index) => {
+                let row = `<tr>
+                    <td>${waste.name.replace("-", " ")}</td>
+                    <td>${waste.type}</td>
+                    <td>${waste.use}</td>
+                    <td>${waste.quantity}</td>
+                    <td>${waste.instruction}</td>
+                    <td>
+                        <button onclick="changeQuantity(${index}, 1)">+</button>
+                        <button onclick="changeQuantity(${index}, -1)">-</button>
+                        <button onclick="removeItem(${index})">Delete</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function changeQuantity(index, change) {
+            wasteData[index].quantity += change;
+            if (wasteData[index].quantity <= 0) {
+                wasteData.splice(index, 1);
+            }
+            localStorage.setItem("wasteItems", JSON.stringify(wasteData));
+            updateTable();
+        }
+
+        function removeItem(index) {
+            wasteData.splice(index, 1);
+            localStorage.setItem("wasteItems", JSON.stringify(wasteData));
+            updateTable();
+        }
+
+        function goToReport() {
+            window.location.href = "report.html";
+        }
+
+        updateTable();
+    </script>
+</body>
+</html>
