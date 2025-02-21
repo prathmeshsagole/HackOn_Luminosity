@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Waste Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Medical Waste Input</h1>
+    </header>
+
+    <main>
+        <form id="waste-form">
+            <label for="item">Select Item:</label>
+            <select id="item">
+                <option value="needles">Needles</option>
+                <option value="syringes">Syringes</option>
+                <option value="scalpels">Scalpels</option>
+                <option value="plastic-packaging">Plastic Packaging</option>
+                <option value="glass-vials">Glass Vials</option>
+                <option value="contaminated-ppe">Contaminated PPE</option>
+                <option value="expired-meds">Expired Medications</option>
+                <option value="cardboard-boxes">Cardboard Boxes</option>
+                <option value="metal-instruments">Metal Instruments</option>
+                <option value="iv-bottles">IV Bottles</option>
+            </select>
+
+            <label for="quantity">Enter Quantity:</label>
+            <input type="number" id="quantity" min="1" required>
+
+            <button type="submit">Add to Report</button>
+        </form>
+
+        <button onclick="goToReport()">Go to Report</button>
+    </main>
+
+    <script>
+        document.getElementById("waste-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let item = document.getElementById("item").value;
+            let quantity = document.getElementById("quantity").value;
+
+            let wasteTypes = {
+                "needles": { type: "Sharps", disposal: "disposable", instruction: "Place in sharps container." },
+                "syringes": { type: "Sharps", disposal: "disposable", instruction: "Dispose with needle attached." },
+                "scalpels": { type: "Sharps", disposal: "disposable", instruction: "Use designated sharps bin." },
+                "plastic-packaging": { type: "Recyclable", disposal: "recyclable", instruction: "Sort and send to recycling." },
+                "glass-vials": { type: "Recyclable", disposal: "recyclable", instruction: "Rinse and recycle." },
+                "contaminated-ppe": { type: "Hazardous", disposal: "disposable", instruction: "Use biohazard bag." },
+                "expired-meds": { type: "Hazardous", disposal: "disposable", instruction: "Do not flush. Dispose properly." },
+                "cardboard-boxes": { type: "Recyclable", disposal: "recyclable", instruction: "Flatten and recycle." },
+                "metal-instruments": { type: "Recyclable", disposal: "recyclable", instruction: "Sterilize and recycle." },
+                "iv-bottles": { type: "Recyclable", disposal: "recyclable", instruction: "Empty and recycle." }
+            };
+
+            let selectedWaste = wasteTypes[item];
+
+            let wasteData = JSON.parse(localStorage.getItem("wasteItems")) || [];
+            wasteData.push({
+                name: item.replace("-", " "),
+                type: selectedWaste.type,
+                quantity: quantity,
+                disposal: selectedWaste.disposal,
+                instruction: selectedWaste.instruction
+            });
+
+            localStorage.setItem("wasteItems", JSON.stringify(wasteData));
+
+            alert("Item added!");
+        });
+
+        function goToReport() {
+            window.location.href = "report.html";
+        }
+    </script>
+</body>
+</html>
