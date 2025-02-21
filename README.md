@@ -69,20 +69,16 @@ To set up MediBuddy on your local machine, follow these steps:
 
 The **Dashboard** is the landing page of MediBuddy. It displays a collection of blogs related to **waste management**. Users can browse through the blogs to gain insights and tips on effective waste management practices.
 
-![Dashboard UI](assets/dashboard.png)
 
 ### 🗂 Categories
 
 The **Categories** page allows users to select the type of waste they want to manage. Users can choose from **single-use, multi-use, and hazardous waste** categories. They can also specify the **quantity and product name** from a dropdown menu.
 
-![Categories UI](assets/categories.png)
+
 
 ### 📈 Report
 
 The **Report** page provides **analytics** on the user's waste generation. It offers insights into the **types and quantities** of waste generated, helping users to make **informed decisions** about their waste management practices.
-
-![Report UI](assets/report.png)
-
 ---
 
 ## 🔥 Additional Features
