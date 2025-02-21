@@ -73,3 +73,53 @@ button {
 .clear-button:hover {
     background: #e67e22;
 }
+
+.print-button {
+    background: #27ae60;
+    color: white;
+}
+
+.print-button:hover {
+    background: #2ecc71;
+}
+
+/* Analytics Section */
+#analytics {
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.chart-container {
+    width: 50%;
+    margin: auto;
+}
+
+canvas {
+    max-width: 100% !important;
+}
+
+/* Ensure analytics appear on the second page when printing */
+@media print {
+    body {
+        visibility: hidden;
+    }
+    main, main * {
+        visibility: visible;
+    }
+    main {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    #analytics {
+        page-break-before: always; /* Forces Analytics onto a new page */
+    }
+}
