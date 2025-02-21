@@ -1,4 +1,4 @@
-# ![MediBuddy Logo](assets/logo.png) MediBuddy  
+# MediBuddy  
 
 MediBuddy is a user-friendly application designed to help users manage and analyze their waste generation efficiently. The application is divided into three main pages: **Dashboard, Categories, and Report**. Below is a detailed guide on how to set up and navigate through the UI of MediBuddy.
 
@@ -7,7 +7,6 @@ MediBuddy is a user-friendly application designed to help users manage and analy
 
 MediBuddy aims to streamline the process of waste management by providing an **intuitive interface** for users to track and analyze their waste generation. The application is designed to be simple yet powerful, offering insights that can help users make informed decisions about their waste management practices.
 
-![Waste Management Illustration](assets/waste_management.png)
 
 ---
 
@@ -115,7 +114,5 @@ MediBuddy is licensed under the **MIT License**. See the [LICENSE](LICENSE) file
 
 Thank you for using **MediBuddy**! 🌱 We hope it helps you manage your waste more efficiently. If you have any questions or feedback, please feel free to **reach out to us**.
 
----
 
-![Footer Logo](assets/footer_logo.png)
 
