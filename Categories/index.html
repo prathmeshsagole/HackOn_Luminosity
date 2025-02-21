@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Product Category</h1>
+        <form id="categoryForm">
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="single-use">Single Use</option>
+                <option value="multi-use">Multi Use</option>
+                <option value="hazardous">Hazardous</option>
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <select id="quantity" name="quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="product">Product Name:</label>
+            <select id="product" name="product">
+                <option value="product1">Product 1</option>
+                <option value="product2">Product 2</option>
+                <option value="product3">Product 3</option>
+            </select>
+
+            <button type="button" onclick="redirectToReport()">Generate Report</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
